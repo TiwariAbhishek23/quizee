@@ -1,3 +1,18 @@
 fastapi
 uvicorn
 fastapi-socketio
+pytest
+python-socketio[client]
+python-socketio[asyncio_client]
+
+SQLAlchemy
+databases[sqlite]
+
+pydantic[email]
+
+#for password hashing
+passlib[bcrypt]
+python-dotenv
+
+requests
+python-jose[cryptography]
