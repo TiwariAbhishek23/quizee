@@ -10,9 +10,11 @@ databases[sqlite]
 
 pydantic[email]
 
-#for password hashing
 passlib[bcrypt]
 python-dotenv
 
 requests
 python-jose[cryptography]
+openai
+pdfplumber
+firebase-admin

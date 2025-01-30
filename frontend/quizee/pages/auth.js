@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+"use client";
+import { useState, useEffect } from "react";
+import { auth, loginWithGoogle, logout } from "../firebase.js";
 
-export default function Auth() {
-    const [isLogin, setIsLogin] = useState(true);
+export default function Login() {
+  const [user, setUser] = useState(null);
 
-    function switchAuthModeHandler() {
-        setIsLogin((prevState) => !prevState);
-    }
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
 
-    return (
+  return (
+    <div>
+      {user ? (
         <>
-            <h1>Auth Page</h1>
-            <button onClick={switchAuthModeHandler}>Switch to {isLogin ? 'Signup' : 'Login'}</button>
+          <p>Welcome, {user.displayName}</p>
+          <button onClick={logout}>Logout</button>
         </>
-    );
+      ) : (
+        <button onClick={loginWithGoogle}>Login with Google</button>
+      )}
+    </div>
+  );
 }
