@@ -38,9 +38,10 @@ const signInWithEmail = async (email, password) => {
   try {
     const result = await signInWithEmailAndPassword(auth, email, password);
     const user = result.user;
+    alert("Welcome back " + user.email);
     return user;
   } catch (error) {
-    alert(error);
+    alert("Invalid email or password " + error);
   }
 }
 

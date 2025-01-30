@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ContactForm from "./contactform/page";
+import CreateQuiz from "./createquiz";
 import Login from "./login";
 
 const Hero = () => {
   const [signup, setSignup] = useState(false);
   const [login, setLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <>
     <div className="hero">
@@ -62,6 +64,7 @@ const Hero = () => {
     {login && (
       <Login />
     )}
+    <CreateQuiz />
     </>
   );
 };

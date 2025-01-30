@@ -1,6 +1,9 @@
 import Image from "next/image";
-import { googleLogin } from "@/firebase";
+import { useState } from "react";
+import { googleLogin, signInWithEmail } from "@/firebase";
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
   return (
     <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 ">
       <div className="w-full px-6 py-8 md:px-8 ">
@@ -72,6 +75,8 @@ const Login = () => {
             id="LoggingEmailAddress"
             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -83,23 +88,26 @@ const Login = () => {
             >
               Password
             </label>
-            <a
-              href="#"
-              className="text-xs text-gray-500 dark:text-gray-300 hover:underline"
-            >
-              Forget Password?
-            </a>
           </div>
 
           <input
             id="loggingPassword"
             className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
         <div className="mt-6">
-          <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-black capitalize transition-colors duration-300 transform bg-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+          <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-black capitalize transition-colors duration-300 transform bg-white rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+            onClick={
+                () =>{
+                    signInWithEmail(email, password)
+                    setEmail("")
+                    setPassword("")
+                }}
+          >
             Sign In
           </button>
         </div>
