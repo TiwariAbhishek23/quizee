@@ -9,6 +9,14 @@ const CreateQuiz = () => {
   const [quizCode, setQuizCode] = useState(null);
   const [questions, setQuestions] = useState([]);
 
+  const generateQuizCode = () => {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let code = "";
+    for (let i = 0; i < 6; i++) {
+      code += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return code;
+  }
   const handleCreateQuiz = async () => {
     if (!topic.trim() || numQuestions < 1 || numQuestions > 10) {
       alert("Please enter a valid topic and select 1-10 questions.");
@@ -16,7 +24,9 @@ const CreateQuiz = () => {
     }
 
     try {
-        
+      const response = await fetch(`http://localhost:8000/generate-quiz?topic=${topic}&num_questions=${numQuestions}`);
+      console.log(response);
+      setQuizCode(generateQuizCode());
     } catch (error) {
       console.error(error);
       alert("An error occurred. Please try again.");

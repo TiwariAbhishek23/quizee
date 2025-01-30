@@ -3,6 +3,8 @@ import ContactForm from "./contactform/page";
 import CreateQuiz from "./createquiz";
 import Login from "./login";
 import Leaderboard from "./leaderboard";
+import JoinQuiz from "./joinquiz";
+import Quiz from "./quizPlayedCard";
 
 const Hero = () => {
   const [signup, setSignup] = useState(false);
@@ -67,6 +69,8 @@ const Hero = () => {
     )}
     <CreateQuiz />
     <Leaderboard />
+    {/* <JoinQuiz /> */}
+    <Quiz />
     </>
   );
 };

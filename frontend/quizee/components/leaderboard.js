@@ -7,7 +7,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/leaderboard");
+        const res = await fetch("");
         const data = await res.json();
         if (res.ok) {
           setLeaderboard(data.leaderboard);
