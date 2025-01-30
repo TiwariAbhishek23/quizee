@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ContactForm from "./contactform/page";
 import CreateQuiz from "./createquiz";
 import Login from "./login";
+import Leaderboard from "./leaderboard";
 
 const Hero = () => {
   const [signup, setSignup] = useState(false);
@@ -65,6 +66,7 @@ const Hero = () => {
       <Login />
     )}
     <CreateQuiz />
+    <Leaderboard />
     </>
   );
 };

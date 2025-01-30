@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException, APIRouter
-from firebase_admin import verify_firebase_token
+from config.firebase_admin import verify_firebase_token
 
 login_router = APIRouter()
 
