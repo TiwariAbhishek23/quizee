@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut} from "firebase/auth"
 
@@ -21,7 +20,7 @@ const googleLogin = async () => {
     const user = result.user;
     return user;
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 }
 
@@ -31,7 +30,7 @@ const signUpWithEmail = async (email, password) => {
     const user = result.user;
     return user;
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 }
 
@@ -41,7 +40,7 @@ const signInWithEmail = async (email, password) => {
     const user = result.user;
     return user;
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 }
 
@@ -49,7 +48,7 @@ const signOutUser = async () => {
   try {
     await signOut(auth);
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 }
 

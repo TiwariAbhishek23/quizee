@@ -1,5 +1,5 @@
 import React from 'react'
-import ContactmeCont from '../components/contactForm';
+import ContactmeCont from '../components/contactform/page';
 const Contactme = () =>{
     return(
         <>
