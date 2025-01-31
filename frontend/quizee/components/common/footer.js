@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Image from 'next/image';
-import Logo from '../app/favicon.ico';
+import Logo from '../../app/favicon.ico';
 
 const Footer = () => {
     return (

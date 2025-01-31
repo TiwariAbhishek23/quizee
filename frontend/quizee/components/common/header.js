@@ -1,8 +1,7 @@
 import React, {useState, useEffect}  from "react";
 import Image from "next/image";
-import Logo from "../app/favicon.ico";
+import Logo from "../../app/favicon.ico";
 import Link from "next/link";
-import ContactForm from "./contactform/page";
 
 
 const Header = () => {

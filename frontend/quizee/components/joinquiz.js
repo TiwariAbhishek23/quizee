@@ -9,14 +9,14 @@ export default function JoinQuiz() {
 
   const joinQuiz = async () => {
     try {
-      const res = await fetch("http://localhost:8000/join-quiz", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ quiz_code: quizCode, username }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.detail || "Failed to join quiz");
+      const ws = new WebSocket(`ws://localhost:8000/ws/${quizCode}`);
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        alert(data.message);
+        if (data.type === "leaderboard") {
+          setLeaderboard(data.leaderboard);
+        }
+      };
 
       setMessage(data.message);
       fetchLeaderboard(); // Update leaderboard after joining

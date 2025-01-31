@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
+  
 
   useEffect(() => {
     const fetchLeaderboard = async () => {

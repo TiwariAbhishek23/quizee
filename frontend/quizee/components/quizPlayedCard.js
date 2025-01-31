@@ -1,11 +1,10 @@
-"use client";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 
 export default function Quiz() {
   const [quizCode, setQuizCode] = useState("");
   const [username, setUsername] = useState("");
   const [question, setQuestion] = useState(null);
-  const [timer, setTimer] = useState(30);  // Default 30 seconds
+  const [timer, setTimer] = useState(30);
   const [answer, setAnswer] = useState("");
   const [message, setMessage] = useState("");
   const [leaderboard, setLeaderboard] = useState([]);
@@ -20,7 +19,7 @@ export default function Quiz() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || "Failed to join quiz");
       setMessage(data.message);
-      fetchNextQuestion(); // Fetch first question
+      fetchNextQuestion();
     } catch (error) {
       setMessage(error.message);
     }

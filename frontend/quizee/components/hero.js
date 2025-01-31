@@ -3,13 +3,11 @@ import ContactForm from "./contactform/page";
 import CreateQuiz from "./createquiz";
 import Login from "./login";
 import Leaderboard from "./leaderboard";
-import JoinQuiz from "./joinquiz";
 import Quiz from "./quizPlayedCard";
 
 const Hero = () => {
   const [signup, setSignup] = useState(false);
   const [login, setLogin] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
   return (
     <>
     <div className="hero">
@@ -47,10 +45,10 @@ const Hero = () => {
                   SignUp
                 </button>
                 <button
-                  className="text-sm/6 font-semibold text-gray-900"
-                  onClick={() => setLogin(!login)}
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => setSignup(!login)}
                 >
-                  LogIn <span aria-hidden="true">→</span>
+                  Log In
                 </button>
               </div>
             </div>
@@ -69,7 +67,6 @@ const Hero = () => {
     )}
     <CreateQuiz />
     <Leaderboard />
-    {/* <JoinQuiz /> */}
     <Quiz />
     </>
   );

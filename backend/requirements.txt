@@ -19,3 +19,4 @@ openai==0.28.1
 pdfplumber
 firebase-admin
 python-multipart
+websockets

@@ -1,7 +1,7 @@
 "use client";
-import Footer from "@/components/footer";
-import GotoTop from "@/components/gototop";
-import Header from "@/components/header";
+import Footer from "@/components/common/footer";
+import GotoTop from "@/components/common/gototop";
+import Header from "@/components/common/header";
 import Hero from "@/components/hero";
 import Head from "next/head";
 
