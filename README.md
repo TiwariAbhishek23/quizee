@@ -9,6 +9,7 @@
 - [x] AI based Quiz questions generation
 - [x] Firebase authentication
 - [x] Beautiful UI
+- [x] Timer for Quiz questions
 
 ## Future Features
 
