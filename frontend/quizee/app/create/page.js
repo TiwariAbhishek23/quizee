@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { generateQuizCode } from "@/utils/quizCode";
 import { motion } from "framer-motion";
 import Leaderboard from "@/components/leaderboard";
+import QuizCodeDisplay from "@/components/quizCodeDisplay";
 
 const CreateQuiz = () => {
   const [topic, setTopic] = useState("");
@@ -11,6 +12,8 @@ const CreateQuiz = () => {
   const [quizCode, setQuizCode] = useState(null);
   const [questions, setQuestions] = useState([]);
 
+
+  // Will be used to add or edit questions
   const [question, setQuestion] = useState("");
   const [option1, setOption1] = useState("");
   const [option2, setOption2] = useState("");
@@ -18,6 +21,7 @@ const CreateQuiz = () => {
   const [option4, setOption4] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [addQuestionBool, setAddQuestionBool] = useState(false);
+  const [editQuestion, setEditQuestion] = useState(false);
   const [uploadedQuestions, setUploadedQuestions] = useState([]);
 
   const handleUpload = (index) => {
@@ -33,7 +37,7 @@ const CreateQuiz = () => {
         })
       );
     };
-    // remove uploaded question from list
+    setUploadedQuestions([...uploadedQuestions, updatedQuestions[index]]);
     updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
   };
@@ -50,10 +54,24 @@ const CreateQuiz = () => {
     updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
     setAddQuestionBool(true);
+    setEditQuestion(true);
   };
 
   const uploadQuestions = async () => {
-
+    const ws = new WebSocket(`ws://localhost:8000/ws/${quizCode}/question`);
+    ws.onopen = () => {
+      questions.forEach(([question, options, answer]) => {
+        ws.send(
+          JSON.stringify({
+            question,
+            options,
+            answer,
+          })
+        );
+      });
+    };
+    setUploadedQuestions(questions);
+    setQuestions([]);
   };
 
   const handleDelete = (index) => {
@@ -107,7 +125,7 @@ const CreateQuiz = () => {
           className="w-full p-3 border bg-green-200 rounded-md outline-none focus:ring-2 focus:ring-indigo-500"
         />
         <button
-          onClick={addQuestion}
+          onClick={handleAddQuestion}
           className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-500 transition"
         >
           Add Question
@@ -115,6 +133,10 @@ const CreateQuiz = () => {
         <button
           className="w-full bg-red-400 text-white py-2 rounded-md hover:bg-red-600 transition"
           onClick={() => {
+            if (editQuestion) {
+              setEditQuestion(false);
+              handleAddQuestion();
+            }
             setAddQuestionBool(!addQuestionBool);
           }}
         >
@@ -124,7 +146,7 @@ const CreateQuiz = () => {
     );
   };
 
-  const addQuestion = () => {
+  const handleAddQuestion = () => {
     if (
       !question.trim() ||
       !option1.trim() ||
@@ -167,8 +189,7 @@ const CreateQuiz = () => {
       const data = await response.json();
       setQuestions(data);
     } catch (error) {
-      alert(error);
-      alert("An error occurred. Please try again.");
+      alert("An error occurred. Please try again. error: " + error);
     }
   };
 
@@ -208,20 +229,7 @@ const CreateQuiz = () => {
           </>
       )}
       {/* Quiz Code Section */}
-      {quizCode && (
-        <motion.button
-        className="mt-6 p-4 bg-gray-100 text-center rounded-md w-full"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        onClick={() => {
-          navigator.clipboard.writeText(quizCode);
-          alert("Quiz code copied to clipboard!");
-        }}
-      >
-        <p className="text-gray-700 font-medium">Quiz Code:</p>
-        <p className="text-lg font-bold text-indigo-600">{quizCode}</p>
-      </motion.button>
-      )}
+      {quizCode && questions.length > 0 && <QuizCodeDisplay quizCode={quizCode} />}
 
       {/* Questions Section */}
       {questions.length > 0 && (
@@ -285,7 +293,7 @@ const CreateQuiz = () => {
               </ul>
             </motion.div>
       )}
-      {quizCode &&  (
+      {quizCode && questions.length>0 && (
         <>
           <button
             className="m-4 bg-slate-200 border-s-violet-500 p-3 rounded-md justify-center text-center items-center"
@@ -295,7 +303,7 @@ const CreateQuiz = () => {
           >
             Add Questions
           </button>
-         {questions.length>0 && ( <button
+          <button
             className="m-4 bg-lime-300 border-s-violet-500 p-3 rounded-md justify-center text-center items-center"
             onClick={() => {
               uploadQuestions();
@@ -303,7 +311,6 @@ const CreateQuiz = () => {
           >
             Upload Questions
           </button>
-          )}
         </>
       )}
       {addQuestionBool && addQuestionForm()}
@@ -344,7 +351,7 @@ const CreateQuiz = () => {
         </ul>
       </motion.div>
       )}
-      {quizCode && (
+      {quizCode && questions.length > 0 && (
       <Leaderboard quizCode={quizCode} />
     )}
     </div>

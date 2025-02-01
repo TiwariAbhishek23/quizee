@@ -1,6 +1,7 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from typing import Dict, List
 from datetime import datetime
+from collections import deque
 
 ws_router = APIRouter()
 
@@ -49,7 +50,6 @@ async def quiz_websocket(websocket: WebSocket, quiz_id: str):
         if websocket in active_quiz_connections.get(quiz_id, []):
             active_quiz_connections[quiz_id].remove(websocket)
 
-        # If no connections are left, delete the quiz entry
         if not active_quiz_connections.get(quiz_id):
             del active_quiz_connections[quiz_id]
 
@@ -60,7 +60,7 @@ async def leaderboard_websocket(websocket: WebSocket, quiz_id: str):
 
     if quiz_id not in active_quiz_connections:
         active_quiz_connections[quiz_id] = []
-    
+
     active_quiz_connections[quiz_id].append(websocket)
 
     try:
@@ -110,7 +110,6 @@ async def leaderboard_websocket(websocket: WebSocket, quiz_id: str):
             active_quiz_connections[quiz_id].remove(websocket)
             leaderboard.clear()
 
-        # If no connections are left, delete the quiz entry
         if not active_quiz_connections.get(quiz_id):
             del active_quiz_connections[quiz_id]
             leaderboard.clear()

@@ -4,7 +4,6 @@ import Link from "next/link";
 const Hero = () => {
     return (
       <div className="h-screen flex">
-        {/* Left Section - Create Quiz */}
         <div className="w-1/2 flex flex-col justify-center items-center bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-10">
           <h1 className="text-4xl font-bold mb-4">Create a Quiz</h1>
           <p className="text-lg mb-6">Host engaging quizzes and challenge players!</p>
@@ -14,8 +13,7 @@ const Hero = () => {
             Create Quiz
           </Link>
         </div>
-  
-        {/* Right Section - Play Quiz */}
+
         <div className="w-1/2 flex flex-col justify-center items-center bg-gradient-to-r from-purple-500 to-pink-600 text-white p-10">
           <h1 className="text-4xl font-bold mb-4">Join a Quiz</h1>
           <p className="text-lg mb-6">Play quizzes, compete, and test your knowledge!</p>

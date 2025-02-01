@@ -10,7 +10,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation"; // Use useRouter for Next.js navigation
+import { useRouter } from "next/navigation";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -25,13 +25,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Create Authentication Context
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const router = useRouter(); // Next.js Router
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -46,10 +45,9 @@ export const AuthProvider = ({ children }) => {
       }
     });
 
-    return () => unsubscribe(); // Cleanup listener
+    return () => unsubscribe();
   }, []);
 
-  // Google Login
   const googleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
@@ -58,13 +56,12 @@ export const AuthProvider = ({ children }) => {
         name: result.user.displayName,
         email: result.user.email,
       });
-      router.push("/"); // Redirect to Home after login
+      router.push("/");
     } catch (error) {
       alert(error.message);
     }
   };
 
-  // Email/Password Sign-Up
   const signUpWithEmail = async (email, password) => {
     try {
       const result = await createUserWithEmailAndPassword(auth, email, password);
@@ -73,13 +70,12 @@ export const AuthProvider = ({ children }) => {
         name: result.user.displayName || email.split("@")[0],
         email: result.user.email,
       });
-      router.push("/"); // Redirect to Home after signup
+      router.push("/");
     } catch (error) {
       alert(error.message);
     }
   };
 
-  // Email/Password Sign-In
   const signInWithEmail = async (email, password) => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
@@ -89,18 +85,17 @@ export const AuthProvider = ({ children }) => {
         email: result.user.email,
       });
       alert("Welcome back " + result.user.email);
-      router.push("/"); // Redirect to Home after login
+      router.push("/");
     } catch (error) {
       alert("Invalid email or password: " + error.message);
     }
   };
 
-  // Sign Out
   const signOutUser = async () => {
     try {
       await signOut(auth);
-      setUser(null); // Ensure UI updates
-      router.push("/login"); // Redirect to login after logout
+      setUser(null);
+      router.push("/login");
     } catch (error) {
       alert(error.message);
     }
