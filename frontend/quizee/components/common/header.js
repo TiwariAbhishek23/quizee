@@ -1,74 +1,72 @@
-import React, {useState, useEffect}  from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "../../app/favicon.ico";
 import Link from "next/link";
-
+import { useAuth } from "@/firebase";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-    return (
-      <header className="bg-white">
-        <nav
-          className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
-          aria-label="Global"
-        >
-          <div className="flex lg:flex-1">
-            <Link href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Quizee</span>
-              <Image
-                className="h-8 w-auto"
-                src={Logo}
-                alt="Quizee Logo"
+  const { user, signOutUser } = useAuth();
+  return (
+    <header className="bg-white text-black">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        aria-label="Global"
+      >
+        <div className="flex lg:flex-1">
+          <Link href="/" className="-m-1.5 p-1.5">
+            {/* <span className="inline m-4 text-red-400">Quizee</span> */}
+            <Image className="h-8 w-auto inline" src={Logo} alt="Quizee Logo" />
+          </Link>
+        </div>
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg
+              className="size-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
               />
-            </Link>
-          </div>
-          <div className="flex lg:hidden">
+            </svg>
+          </button>
+        </div>
+        <div className="hidden lg:flex lg:gap-x-12">
+          <div className="relative">
             <button
               type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+              className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900"
+              aria-expanded={isOpen}
+              onClick={() => setIsOpen(!isOpen)}
             >
-              <span className="sr-only">Open main menu</span>
+              Product
               <svg
-                className="size-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
+                className="size-5 flex-none text-gray-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
                 aria-hidden="true"
                 data-slot="icon"
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  fillRule="evenodd"
+                  d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                  clipRule="evenodd"
                 />
               </svg>
             </button>
-          </div>
-          <div className="hidden lg:flex lg:gap-x-12">
-            <div className="relative">
-              <button
-                type="button"
-                className="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900"
-                aria-expanded={isOpen}
-                onClick={() => setIsOpen(!isOpen)}
-              >
-                Product
-                <svg
-                  className="size-5 flex-none text-gray-400"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  data-slot="icon"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
-              {isOpen && (
+            {isOpen && (
               <div className="absolute top-full -left-8 z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5">
                 <div className="p-4">
                   <div className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50">
@@ -95,7 +93,10 @@ const Header = () => {
                       </svg>
                     </div>
                     <div className="flex-auto">
-                      <Link href="#" className="block font-semibold text-gray-900">
+                      <Link
+                        href="#"
+                        className="block font-semibold text-gray-900"
+                      >
                         Analytics
                         <span className="absolute inset-0"></span>
                       </Link>
@@ -123,7 +124,10 @@ const Header = () => {
                       </svg>
                     </div>
                     <div className="flex-auto">
-                      <Link href="#" className="block font-semibold text-gray-900">
+                      <Link
+                        href="#"
+                        className="block font-semibold text-gray-900"
+                      >
                         Engagement
                         <span className="absolute inset-0"></span>
                       </Link>
@@ -151,7 +155,10 @@ const Header = () => {
                       </svg>
                     </div>
                     <div className="flex-auto">
-                      <Link href="#" className="block font-semibold text-gray-900">
+                      <Link
+                        href="#"
+                        className="block font-semibold text-gray-900"
+                      >
                         Security
                         <span className="absolute inset-0"></span>
                       </Link>
@@ -179,7 +186,10 @@ const Header = () => {
                       </svg>
                     </div>
                     <div className="flex-auto">
-                      <Link href="#" className="block font-semibold text-gray-900">
+                      <Link
+                        href="#"
+                        className="block font-semibold text-gray-900"
+                      >
                         Integrations
                         <span className="absolute inset-0"></span>
                       </Link>
@@ -207,7 +217,10 @@ const Header = () => {
                       </svg>
                     </div>
                     <div className="flex-auto">
-                      <Link href="#" className="block font-semibold text-gray-900">
+                      <Link
+                        href="#"
+                        className="block font-semibold text-gray-900"
+                      >
                         Automations
                         <span className="absolute inset-0"></span>
                       </Link>
@@ -257,86 +270,98 @@ const Header = () => {
                     Contact sales
                   </Link>
                 </div>
-              </div>)}
-            </div>
-
-            <Link href="#" className="text-sm/6 font-semibold text-gray-900">
-              Features
-            </Link>
-            <Link href="#" className="text-sm/6 font-semibold text-gray-900">
-              Marketplace
-            </Link>
-            <Link href="/contactform" className="text-sm/6 font-semibold text-gray-900">
-              Company
-            </Link>
+              </div>
+            )}
           </div>
+
+          <Link href="#" className="text-sm/6 font-semibold text-gray-900">
+            Features
+          </Link>
+          <Link href="#" className="text-sm/6 font-semibold text-gray-900">
+            Pricing
+          </Link>
+          <Link href="#" className="text-sm/6 font-semibold text-gray-900">
+            About US
+          </Link>
+        </div>
+        {user ? (
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end text-sm font-semibold text-gray-900">
+          <span aria-hidden="true" className="m-2">{user.name}</span>
+          <button
+            className="text-red-300 hover:text-red-500"
+            onClick={() => signOutUser()}
+          >
+            Log out <span aria-hidden="true">&rarr;</span>
+          </button>
+          </div>
+        ) : (
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link href="/contactform" className="text-sm/6 font-semibold text-gray-900">
+            <Link
+              href="/signup"
+              className="text-sm/6 font-semibold text-gray-900"
+            >
               Join Us <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
-        </nav>
-        <div className="lg:hidden" role="dialog" aria-modal="true">
-          <div className="fixed inset-0 z-10"></div>
-          <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-            <div className="flex items-center justify-between">
-              <Link href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Quizee</span>
-                <Image
-                  className="h-8 w-auto"
-                  src={Logo}
-                  alt="Quizee Logo"
-                />
-              </Link>
-              <button
-                type="button"
-                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+        )}
+      </nav>
+      <div className="lg:hidden" role="dialog" aria-modal="true">
+        <div className="fixed inset-0 z-10"></div>
+        <div className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="flex items-center justify-between">
+            <Link href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Quizee</span>
+              <Image className="h-8 w-auto" src={Logo} alt="Quizee Logo" />
+            </Link>
+            <button
+              type="button"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+            >
+              <span className="sr-only">Close menu</span>
+              <svg
+                className="size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
               >
-                <span className="sr-only">Close menu</span>
-                <svg
-                  className="size-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                  data-slot="icon"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18 18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            </div>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  <div className="-mx-3">
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                      aria-controls="disclosure-1"
-                      aria-expanded={isOpen}
-                      onClick={() => setIsOpen(!isOpen)}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="space-y-2 py-6">
+                <div className="-mx-3">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 pl-3 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                    aria-controls="disclosure-1"
+                    aria-expanded={isOpen}
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    Product
+                    <svg
+                      className="size-5 flex-none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      data-slot="icon"
                     >
-                      Product
-                      <svg
-                        className="size-5 flex-none"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                        data-slot="icon"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button>
-                    {isOpen && (
+                      <path
+                        fillRule="evenodd"
+                        d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                  {isOpen && (
                     <div className="mt-2 space-y-2" id="disclosure-1">
                       <Link
                         href="#"
@@ -380,42 +405,43 @@ const Header = () => {
                       >
                         Contact sales
                       </Link>
-                    </div>)}
-                  </div>
+                    </div>
+                  )}
+                </div>
 
-                  <Link
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                  >
-                    Features
-                  </Link>
-                  <Link
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                  >
-                    Marketplace
-                  </Link>
-                  <Link
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                  >
-                    Company
-                  </Link>
-                </div>
-                <div className="py-6">
-                  <Link
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </Link>
-                </div>
+                <Link
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Features
+                </Link>
+                <Link
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Marketplace
+                </Link>
+                <Link
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Company
+                </Link>
+              </div>
+              <div className="py-6">
+                <Link
+                  href="#"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Log in
+                </Link>
               </div>
             </div>
           </div>
         </div>
-      </header>
-    );
+      </div>
+    </header>
+  );
 };
 
 export default Header;

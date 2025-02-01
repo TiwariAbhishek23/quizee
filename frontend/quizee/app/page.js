@@ -1,26 +1,17 @@
 "use client";
-import Footer from "@/components/common/footer";
-import GotoTop from "@/components/common/gototop";
-import Header from "@/components/common/header";
+import HeroWithOutLogin from "@/components/heroWithOutLogin";
 import Hero from "@/components/hero";
-import Head from "next/head";
+import { useAuth } from "@/firebase";
 
 export default function Home() {
+  const { user } = useAuth();
   return (
     <div>
-      <Head >
-        <title>Quizee</title>
-        <meta name="description" content="Quiz website for all your quiz needs" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="keywords" content="quiz, quizee, quiz website, Abhishek Tiwari, Abhishek NSUT, Abhishek" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main>
-        <Header />
+      {user ? (
         <Hero />
-        <GotoTop />
-        <Footer />
-      </main>
+      ) : (
+        <HeroWithOutLogin />
+      )}
     </div>
   );
 }
