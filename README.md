@@ -1,0 +1,16 @@
+# Quizee a app for your all Quiz needs
+
+## Features
+
+- [x] Create Quiz questions using AI
+- [x] Share Quiz with friends
+- [x] Websocket support for real-time quiz questions sharing
+- [x] Live Leaderboard for Quiz
+- [x] AI based Quiz questions generation
+- [x] Firebase authentication
+- [x] Beautiful UI
+
+## Future Features
+
+- [ ] AI based Quiz questions generation from PDF
+- [ ] Hosting
