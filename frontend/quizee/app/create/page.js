@@ -37,7 +37,7 @@ const CreateQuiz = () => {
         })
       );
     };
-    setUploadedQuestions([...uploadedQuestions, updatedQuestions[index]]);
+    // setUploadedQuestions([...uploadedQuestions, updatedQuestions[index]]);
     updatedQuestions.splice(index, 1);
     setQuestions(updatedQuestions);
   };
@@ -70,7 +70,7 @@ const CreateQuiz = () => {
         );
       });
     };
-    setUploadedQuestions(questions);
+    // setUploadedQuestions(questions);
     setQuestions([]);
   };
 
@@ -293,7 +293,7 @@ const CreateQuiz = () => {
               </ul>
             </motion.div>
       )}
-      {quizCode && questions.length>0 && (
+      {quizCode && (
         <>
           <button
             className="m-4 bg-slate-200 border-s-violet-500 p-3 rounded-md justify-center text-center items-center"
@@ -306,7 +306,7 @@ const CreateQuiz = () => {
           <button
             className="m-4 bg-lime-300 border-s-violet-500 p-3 rounded-md justify-center text-center items-center"
             onClick={() => {
-              uploadQuestions();
+              // uploadQuestions();
             }}
           >
             Upload Questions
