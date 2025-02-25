@@ -15,3 +15,15 @@
 
 - [ ] AI based Quiz questions generation from PDF
 - [ ] Hosting
+
+## Steps to run the app
+
+- Frontend
+  - `cd frontend`
+  - `cd quizee`
+  - `npm run dev`
+
+- Backend
+    - `cd backend`
+    - `\vevn\Scripts\activate`
+    - `uvicorn main:app --reload`
